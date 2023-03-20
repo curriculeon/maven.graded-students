@@ -41,19 +41,14 @@ public class Classroom {
     }
 
     public Map<Student, Character> getGradeBook() {
-        Map<Student, Character> gradeBook = new HashMap<>();
-        int numStudents = students.size();
-        if (numStudents == 0) {
-            return gradeBook;
-        }
-        // Sort students by average exam score
-        Student[] sortedStudents = getStudentsByScore();
-        // Determine grade cutoffs based on percentile ranks
-        // Assign grades based on percentile ranks
-        for (int i = 0; i < sortedStudents.length; i++) {
-            double percentileRank = ((double) i) / numStudents;
-            char grade;
-            if (i == sortedStudents.length - 1) {
+        final Map<Student, Character> gradeBook = new HashMap<>();
+        final Student[] sortedStudents = getStudentsByScore();
+        final int numberOfStudents = sortedStudents.length;
+        for (Integer studentOrdinal = 0; studentOrdinal < numberOfStudents; studentOrdinal++) {
+            final Student currentStudent = sortedStudents[studentOrdinal];
+            final double percentileRank = studentOrdinal.doubleValue() / numberOfStudents;
+            final char grade;
+            if (studentOrdinal == sortedStudents.length - 1) {
                 grade = 'F';
             } else if (percentileRank < .1) {
                 grade = 'A';
@@ -66,7 +61,7 @@ public class Classroom {
             } else {
                 grade = 'A';
             }
-            gradeBook.put(sortedStudents[i], grade);
+            gradeBook.put(currentStudent, grade);
         }
         return gradeBook;
     }
