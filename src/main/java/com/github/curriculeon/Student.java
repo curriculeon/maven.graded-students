@@ -1,16 +1,18 @@
 package com.github.curriculeon;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Student implements Comparable<Student> {
     private String firstName;
     private String lastName;
-    private Double[] examScores;
+    private List<Double> examScores;
 
     public Student(String firstName, String lastName, Double[] examScores) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.examScores = examScores;
+        this.examScores = new LinkedList<>(Arrays.asList(examScores));
     }
 
     public Student() {
@@ -34,32 +36,27 @@ public class Student implements Comparable<Student> {
     }
 
     public Double[] getExamScores() {
-        return examScores;
+        return examScores.toArray(new Double[0]);
     }
 
     public void setExamScores(Double[] examScores) {
-        this.examScores = examScores;
+        this.examScores = new LinkedList<>(Arrays.asList(examScores));
     }
 
     public void addExamScore(double examScore) {
-        Double[] newExamScores = Arrays.copyOf(this.examScores, this.examScores.length + 1);
-        newExamScores[newExamScores.length - 1] = examScore;
-        this.examScores = newExamScores;
+        examScores.add(examScore);
     }
 
     public void setExamScore(int examNum, double updateScore) {
-        this.examScores[examNum] = updateScore;
+        examScores.add(examNum, updateScore);
     }
 
     public Double getAverageExamScore() {
-        if (this.examScores.length == 0) {
-            return 0.0;
-        }
-        double sum = 0.0;
-        for (double score : this.examScores) {
-            sum += score;
-        }
-        return sum / this.examScores.length;
+        return examScores
+                .stream()
+                .mapToDouble(Double::doubleValue)
+                .average()
+                .getAsDouble();
     }
 
     @Override
@@ -67,7 +64,7 @@ public class Student implements Comparable<Student> {
         return String.format("%s %s -> Exam Scores: %s",
                 this.firstName,
                 this.lastName,
-                Arrays.toString(this.examScores));
+                this.examScores.toString());
     }
 
     @Override
