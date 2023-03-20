@@ -13,22 +13,21 @@ public class GetGradeBookTest {
     @Test
     public void test1() {
         // Create a Classroom with 5 Students
-        Student[] students = new Student[]{
-                new Student("Alice", "Smith", new Double[]{90.0, 80.0}),
-                new Student("Bob", "Johnson", new Double[]{70.0, 60.0}),
-                new Student("Charlie", "Brown", new Double[]{80.0, 70.0}),
-                new Student("Dave", "Jones", new Double[]{60.0, 50.0}),
-                new Student("Eve", "Davis", new Double[]{00.0, 00.0})
-        };
+        Student student0 = new Student("Alice", "Smith", new Double[]{90.0, 80.0});
+        Student student1 = new Student("Charlie", "Brown", new Double[]{80.0, 70.0});
+        Student student2 = new Student("Bob", "Johnson", new Double[]{70.0, 60.0});
+        Student student3 = new Student("Dave", "Jones", new Double[]{60.0, 50.0});
+        Student student4 = new Student("Eve", "Davis", new Double[]{00.0, 00.0});
+        Student[] students = new Student[]{student0, student1, student2, student3, student4};
         Classroom classroom = new Classroom(students);
 
         // Define the expected grade book mapping
         Map<Student, Character> expected = new HashMap<>();
-        expected.put(students[0], 'A');
-        expected.put(students[1], 'C');
-        expected.put(students[2], 'B');
-        expected.put(students[3], 'D');
-        expected.put(students[4], 'F');
+        expected.put(student0, 'A');
+        expected.put(student1, 'B');
+        expected.put(student2, 'C');
+        expected.put(student3, 'D');
+        expected.put(student4, 'F');
 
         // Test the getGradeBook() method
         test(expected, classroom);
