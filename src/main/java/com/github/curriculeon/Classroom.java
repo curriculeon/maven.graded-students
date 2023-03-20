@@ -26,19 +26,11 @@ public class Classroom {
     }
 
     public Boolean addStudent(Student student) {
-        if (students.contains(student)) {
-            return false;
-        }
-        students.add(student);
-        return true;
+        return students.add(student);
     }
 
     public Boolean removeStudent(Student student) {
-        if (!students.contains(student)) {
-            return false;
-        }
-        students.remove(student);
-        return true;
+        return students.remove(student);
     }
 
     public Student[] getStudentsByScore() {
