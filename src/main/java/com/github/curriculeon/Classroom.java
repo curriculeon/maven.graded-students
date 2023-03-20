@@ -51,7 +51,6 @@ public class Classroom {
         // Determine grade cutoffs based on percentile ranks
         // Assign grades based on percentile ranks
         for (int i = 0; i < sortedStudents.length; i++) {
-            Student sortedStudent = sortedStudents[i];
             double percentileRank = ((double) i) / numStudents;
             char grade;
             if (i == sortedStudents.length - 1) {
